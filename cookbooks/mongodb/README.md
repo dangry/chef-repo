@@ -9,7 +9,11 @@ Installs and configures MongoDB, supporting:
 * 10gen repository package installation
 * 10gen MongoDB Monitoring System
 
-[![Build Status](https://travis-ci.org/edelight/chef-mongodb.png?branch=master)](https://travis-ci.org/edelight/chef-mongodb)
+[![Build Status](https://travis-ci.org/chef-brigade/mongodb-cookbook.svg)](https://travis-ci.org/chef-brigade/mongodb-cookbook)
+
+## Community
+
+Live discussion happens on [![Slack](http://brigade-slackin.herokuapp.com/badge.svg)](https://brigade-slackin.herokuapp.com/)
 
 ## REQUIREMENTS:
 
@@ -17,7 +21,6 @@ This cookbook depends on these external cookbooks
 
 - apt
 - python
-- runit
 - yum
 
 As of 0.16 This Cookbook requires
@@ -39,7 +42,11 @@ For examples see the USAGE section below.
 
 ## ATTRIBUTES:
 
-### Mongodb Configuration
+### MongoDB setup
+
+* `default[:mongodb][:install_method]` - This option can be "distro", "mongodb-org" or "none" - Default (distro)
+
+### MongoDB Configuration
 
 Basically all settings defined in the Configuration File Options documentation page can be added to the `node['mongodb']['config'][<setting>]` attribute: http://docs.mongodb.org/manual/reference/configuration-options/
 
@@ -255,7 +262,14 @@ will be modified.
 
 # LICENSE and AUTHOR:
 
-Author:: Markus Korn <markus.korn@edelight.de>
+### Originally forked from
+https://github.com/edelight/chef-mongodb
+
+### Original Author
+Markus Korn <markus.korn@edelight.de>
+
+### Current Maintainers
+Pierce Moore <me@prex.io>
 
 Copyright:: 2011-2014, edelight GmbH
 
