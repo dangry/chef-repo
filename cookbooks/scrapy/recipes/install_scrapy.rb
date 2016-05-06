@@ -6,7 +6,7 @@ execute "apt-get install libxml2-dev libxslt1-dev python-dev" do
   command "apt-get install libxml2-dev libxslt1-dev python-dev"
 end
 
-execute "apt-get install libxml2-dev libxslt1-dev python-dev" do
+execute "scrapy startproject djCrawler" do
   command "cd /opt/"
   command "scrapy startproject djCrawler"
 end
