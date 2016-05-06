@@ -17,6 +17,8 @@ end
 execute "scrapy startproject djCrawler" do
   cwd "/opt"
   command "scrapy startproject djCrawler"
+  rescue  Mixlib::Shellout::ShelloutCommandFailed => e
+   puts "Exception is here #{e}"
 end
 
 remote_file '/opt/djCrawler/djCrawler/spiders/spider.py' do
