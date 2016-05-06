@@ -55,7 +55,7 @@ default[:mongodb][:package_version] = nil
 default[:mongodb][:default_init_name] = 'mongodb'
 default[:mongodb][:instance_name] = 'mongodb'
 
-# this option can be "distro" or "mongodb-org"
+# this option can be "distro", "mongodb-org" or "none"
 default[:mongodb][:install_method] = 'distro'
 
 default[:mongodb][:is_replicaset] = nil
@@ -74,13 +74,18 @@ when 'rhel', 'fedora'
   # determine the package name
   # from http://rpm.pbone.net/index.php3?stat=3&limit=1&srodzaj=3&dl=40&search=mongodb
   # verified for RHEL5,6 Fedora 18,19
+  default[:mongodb][:repo] = 'http://downloads-distro.mongodb.org/repo/redhat/os'
   default[:mongodb][:package_name] = 'mongodb-server'
   default[:mongodb][:sysconfig_file] = '/etc/sysconfig/mongodb'
-  default[:mongodb][:user] = 'mongod'
-  default[:mongodb][:group] = 'mongod'
+  # Weird user/group for older RHEL & Fedora versions
+  if (node['platform_version'].to_i < 7 && node['platform_family'] == 'rhel') \
+    || (node['platform_version'].to_i < 20 && node['platform_family'] == 'fedora')
+    default[:mongodb][:user] = 'mongod'
+    default[:mongodb][:group] = 'mongod'
+    default[:mongodb][:default_init_name] = 'mongod'
+    default[:mongodb][:instance_name] = 'mongod'
+  end
   default[:mongodb][:init_script_template] = 'redhat-mongodb.init.erb'
-  default[:mongodb][:default_init_name] = 'mongod'
-  default[:mongodb][:instance_name] = 'mongod'
   # then there is this guy
   if node['platform'] == 'centos' || node['platform'] == 'amazon'
     Chef::Log.warn("CentOS doesn't provide mongodb, forcing use of mongodb-org repo")
@@ -89,6 +94,7 @@ when 'rhel', 'fedora'
   end
 when 'debian'
   if node['platform'] == 'ubuntu'
+    default[:mongodb][:repo] = 'http://downloads-distro.mongodb.org/repo'
     default[:mongodb][:apt_repo] = 'ubuntu-upstart'
     default[:mongodb][:init_dir] = '/etc/init/'
     default[:mongodb][:init_script_template] = 'debian-mongodb.upstart.erb'
@@ -106,6 +112,6 @@ default[:mongodb][:key_file_content] = nil
 # install the mongo and bson_ext ruby gems at compile time to make them globally available
 # TODO: remove bson_ext once mongo gem supports bson >= 2
 default['mongodb']['ruby_gems'] = {
-  :mongo => nil,
+  :mongo => '~> 1.12',
   :bson_ext => nil
 }

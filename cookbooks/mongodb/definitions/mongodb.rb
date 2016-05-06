@@ -193,7 +193,7 @@ define :mongodb_instance,
     )
     notifies new_resource.reload_action, "service[#{new_resource.name}]"
 
-    if(platform_family?('rhel') && node['platform_version'].to_i >= 7)
+    if(platform_family?('rhel') && node['platform'] != 'amazon' && node['platform_version'].to_i >= 7)
       notifies :run, 'execute[mongodb-systemctl-daemon-reload]', :immediately
     end
   end
@@ -218,7 +218,7 @@ define :mongodb_instance,
       :node,
       "mongodb_cluster_name:#{new_resource.replicaset['mongodb']['cluster_name']} AND \
        mongodb_is_replicaset:true AND \
-       mongodb_shard_name:#{new_resource.replicaset['mongodb']['shard_name']} AND \
+       mongodb_config_replSet:#{new_resource.replicaset['mongodb']['config']['replSet']} AND \
        chef_environment:#{new_resource.replicaset.chef_environment}"
     )
 
@@ -243,6 +243,7 @@ define :mongodb_instance,
     shard_nodes = search(
       :node,
       "mongodb_cluster_name:#{new_resource.cluster_name} AND \
+       mongodb_shard_name:#{new_resource.shard_name} AND \
        mongodb_is_shard:true AND \
        chef_environment:#{node.chef_environment}"
     )
