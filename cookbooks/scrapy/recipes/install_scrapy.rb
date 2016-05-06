@@ -10,3 +10,10 @@ execute "scrapy startproject djCrawler" do
   cwd "/opt"
   command "scrapy startproject djCrawler"
 end
+
+remote_file '/opt/djCrawler/djCrawler/spiders/spider.py' do
+  source 'https://raw.githubusercontent.com/dangry/webCrawler/master/spider.py'
+  owner 'root'
+  group 'root'
+  mode '755'
+end
