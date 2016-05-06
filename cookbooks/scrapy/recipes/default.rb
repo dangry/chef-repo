@@ -6,4 +6,4 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-include_recipe scrapy::install_scrapy
+include_recipe "scrapy::install_scrapy"
