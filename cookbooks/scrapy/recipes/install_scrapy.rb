@@ -6,6 +6,14 @@ execute "apt-get install libxml2-dev libxslt1-dev python-dev" do
   command "apt-get install libxml2-dev libxslt1-dev python-dev"
 end
 
+execute "pip install simplejson" do
+  command "pip install simplejson"
+end
+
+execute "pip install beautifulsoup4" do
+  command "pip install beautifulsoup4"
+end
+
 execute "scrapy startproject djCrawler" do
   cwd "/opt"
   command "scrapy startproject djCrawler"
