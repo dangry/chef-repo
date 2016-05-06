@@ -17,3 +17,10 @@ remote_file '/opt/djCrawler/djCrawler/spiders/spider.py' do
   group 'root'
   mode '755'
 end
+
+remote_file '/opt/djCrawler/djCrawler/items.py' do
+  source 'https://raw.githubusercontent.com/dangry/webCrawler/master/items.py'
+  owner 'root'
+  group 'root'
+  mode '755'
+end
