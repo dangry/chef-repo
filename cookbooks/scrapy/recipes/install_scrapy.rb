@@ -7,6 +7,6 @@ execute "apt-get install libxml2-dev libxslt1-dev python-dev" do
 end
 
 execute "scrapy startproject djCrawler" do
+  cwd "/opt"
   command "scrapy startproject djCrawler"
-  command "mv djCrawler/* /opt/"
 end
