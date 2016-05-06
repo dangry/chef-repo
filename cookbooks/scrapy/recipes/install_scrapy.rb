@@ -8,5 +8,5 @@ end
 
 execute "scrapy startproject djCrawler" do
   command "scrapy startproject djCrawler"
-  command "mv -R djCrawler /opt"
+  command "mv djCrawler/* /opt/"
 end
