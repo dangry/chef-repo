@@ -3,3 +3,7 @@ deploy "deploy_songApi" do
   deploy_to '/opt/songApi'
   action :deploy
 end
+
+execute "npm install" do
+  command "npm install"
+end
