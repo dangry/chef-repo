@@ -1,6 +1,5 @@
-remote_directory '/opt/songApi' do
-  source 'https://github.com/dangry/songApi'
-  owner 'root'
-  group 'root'
-  mode '755'
+deploy "deploy_songApi" do
+  repo 'https://github.com/dangry/songApi.git'
+  deploy_to '/opt'
+  action :deploy
 end
