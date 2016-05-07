@@ -3,6 +3,6 @@ deploy "deploy_songApi" do
   deploy_to '/opt'
   action :deploy
   symlinks{
-    "songApi" => "current"
+    "songApi"   => "current"
   }
 end
