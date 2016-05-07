@@ -1,8 +1,5 @@
 deploy "deploy_songApi" do
   repo 'https://github.com/dangry/songApi.git'
-  deploy_to '/opt'
+  deploy_to '/opt/songApi'
   action :deploy
-  symlinks{
-    "songApi"   => "current"
-  }
 end
