@@ -5,5 +5,6 @@ deploy "deploy_songApi" do
 end
 
 execute "npm install" do
+  cwd "/opt/songApi/current"
   command "npm install"
 end
